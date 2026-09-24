@@ -1,0 +1,171 @@
+<!DOCTYPE html>
+<html lang="en" data-bs-theme="dark">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Security Awareness Quiz System</title>
+    <!-- Bootstrap 5 CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+    
+    <!-- Embedded Custom CSS styles (Replacing static/css/style.css) -->
+    <style>
+        :root {
+            --cyan-accent: #0dcaf0;
+            --dark-bg: #121212;
+            --card-bg: #1e1e1e;
+        }
+        body {
+            background-color: var(--dark-bg);
+            color: #e0e0e0;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            display: flex;
+            flex-direction: column;
+            min-height: 100vh;
+        }
+        .navbar {
+            background-color: #1a1a1a !important;
+            border-bottom: 2px solid var(--cyan-accent);
+        }
+        .navbar-brand {
+            font-weight: bold;
+            color: var(--cyan-accent) !important;
+            letter-spacing: 1px;
+        }
+        .card {
+            background-color: var(--card-bg);
+            border: 1px solid #333;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.3);
+            border-radius: 8px;
+        }
+        .card-header {
+            background-color: #252525;
+            border-bottom: 1px solid #444;
+            font-weight: bold;
+        }
+        .text-cyan { color: var(--cyan-accent) !important; }
+        .btn-cyan {
+            background-color: var(--cyan-accent);
+            color: #000;
+            font-weight: 600;
+            border: none;
+        }
+        .btn-cyan:hover {
+            background-color: #31d2f2;
+            color: #000;
+        }
+        .table {
+            color: #e0e0e0;
+        }
+        .table-dark {
+            background-color: var(--card-bg);
+        }
+        .form-control, .form-select {
+            background-color: #2b2b2b;
+            border: 1px solid #444;
+            color: #fff;
+        }
+        .form-control:focus, .form-select:focus {
+            background-color: #333;
+            border-color: var(--cyan-accent);
+            color: #fff;
+            box-shadow: 0 0 0 0.25rem rgba(13, 202, 240, 0.25);
+        }
+        .quiz-option {
+            background-color: #2b2b2b;
+            border: 1px solid #444;
+            padding: 10px 15px;
+            border-radius: 5px;
+            margin-bottom: 10px;
+            cursor: pointer;
+            transition: 0.3s;
+        }
+        .quiz-option:hover {
+            border-color: var(--cyan-accent);
+            background-color: #333;
+        }
+        footer {
+            margin-top: auto;
+            text-align: center;
+            padding: 15px 0;
+            background-color: #1a1a1a;
+            border-top: 1px solid #333;
+        }
+    </style>
+</head>
+<body>
+
+<nav class="navbar navbar-expand-lg navbar-dark mb-4">
+    <div class="container">
+        <a class="navbar-brand" href="{{ url_for('index') }}">
+            <i class="bi bi-shield-lock"></i> SecAwareness
+        </a>
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarNav">
+            <ul class="navbar-nav ms-auto">
+                {% if session.get('user_id') %}
+                    {% if session.get('role') == 'admin' %}
+                        <li class="nav-item"><a class="nav-link" href="{{ url_for('admin_dashboard') }}">Admin Dashboard</a></li>
+                        <li class="nav-item"><a class="nav-link" href="{{ url_for('admin_questions') }}">Questions</a></li>
+                        <li class="nav-item"><a class="nav-link" href="{{ url_for('admin_users') }}">Users</a></li>
+                        <li class="nav-item"><a class="nav-link" href="{{ url_for('admin_results') }}">Results</a></li>
+                    {% else %}
+                        <li class="nav-item"><a class="nav-link" href="{{ url_for('dashboard') }}">Dashboard</a></li>
+                        <li class="nav-item"><a class="nav-link" href="{{ url_for('quiz') }}">Take Quiz</a></li>
+                        <li class="nav-item"><a class="nav-link" href="{{ url_for('history') }}">History</a></li>
+                        <li class="nav-item"><a class="nav-link" href="{{ url_for('security_awareness') }}">Learn</a></li>
+                    {% endif %}
+                    <li class="nav-item"><a class="nav-link text-danger" href="{{ url_for('logout') }}">Logout ({{ session.get('username') }})</a></li>
+                {% else %}
+                    <li class="nav-item"><a class="nav-link" href="{{ url_for('security_awareness') }}">Learn</a></li>
+                    <li class="nav-item"><a class="nav-link" href="{{ url_for('login') }}">Login</a></li>
+                    <li class="nav-item"><a class="nav-link" href="{{ url_for('register') }}">Register</a></li>
+                {% endif %}
+            </ul>
+        </div>
+    </div>
+</nav>
+
+<div class="container flex-grow-1">
+    <!-- Flash Messages -->
+    {% with messages = get_flashed_messages(with_categories=true) %}
+        {% if messages %}
+            {% for category, message in messages %}
+                <div class="alert alert-{{ category }} alert-dismissible fade show shadow-sm" role="alert">
+                    {{ message }}
+                    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                </div>
+            {% endfor %}
+        {% endif %}
+    {% endwith %}
+
+    <!-- Main Content -->
+    {% block content %}{% endblock %}
+</div>
+
+<footer>
+    <div class="container">
+        <p class="mb-0 text-muted">&copy; 2026 Security Awareness Quiz System. College Mini-Project.</p>
+    </div>
+</footer>
+
+<!-- Bootstrap 5 JS Bundle -->
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+
+<!-- Embedded Custom JS (Replacing static/js/script.js) -->
+<script>
+    // Confirmation dialog for delete actions
+    document.addEventListener("DOMContentLoaded", function() {
+        const deleteForms = document.querySelectorAll('form[action*="delete"]');
+        deleteForms.forEach(form => {
+            form.addEventListener('submit', function(e) {
+                if(!confirm("Are you sure you want to delete this item? This action cannot be undone.")) {
+                    e.preventDefault();
+                }
+            });
+        });
+    });
+</script>
+</body>
+</html>

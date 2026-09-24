@@ -1,0 +1,57 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<div class="row mb-4">
+    <div class="col-md-12">
+        <h2 class="text-cyan">Admin Dashboard</h2>
+        <p class="text-muted">System Overview & Statistics</p>
+    </div>
+</div>
+
+<div class="row g-4 mb-4">
+    <div class="col-md-3">
+        <div class="card text-center h-100 border-start border-primary border-4">
+            <div class="card-body">
+                <h5 class="card-title text-muted">Total Users</h5>
+                <h2 class="display-5 text-primary">{{ stats.users }}</h2>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-3">
+        <div class="card text-center h-100 border-start border-success border-4">
+            <div class="card-body">
+                <h5 class="card-title text-muted">Question Bank</h5>
+                <h2 class="display-5 text-success">{{ stats.questions }}</h2>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-3">
+        <div class="card text-center h-100 border-start border-warning border-4">
+            <div class="card-body">
+                <h5 class="card-title text-muted">Quiz Attempts</h5>
+                <h2 class="display-5 text-warning">{{ stats.attempts }}</h2>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-3">
+        <div class="card text-center h-100 border-start border-info border-4">
+            <div class="card-body">
+                <h5 class="card-title text-muted">Average Score</h5>
+                <h2 class="display-5 text-info">{{ stats.avg_score }}%</h2>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="row">
+    <div class="col-md-4">
+        <a href="{{ url_for('admin_questions') }}" class="btn btn-outline-light w-100 p-3 mb-3">Manage Questions</a>
+    </div>
+    <div class="col-md-4">
+        <a href="{{ url_for('admin_users') }}" class="btn btn-outline-light w-100 p-3 mb-3">View Registered Users</a>
+    </div>
+    <div class="col-md-4">
+        <a href="{{ url_for('admin_results') }}" class="btn btn-outline-light w-100 p-3 mb-3">View All Quiz Results</a>
+    </div>
+</div>
+{% endblock %}

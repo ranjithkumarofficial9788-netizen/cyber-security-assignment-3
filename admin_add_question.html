@@ -1,0 +1,78 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<div class="row justify-content-center">
+    <div class="col-md-8">
+        <div class="card shadow">
+            <div class="card-header d-flex justify-content-between align-items-center py-3">
+                <h4 class="mb-0 text-cyan">Add New Question</h4>
+                <a href="{{ url_for('admin_questions') }}" class="btn btn-sm btn-outline-light">Cancel</a>
+            </div>
+            <div class="card-body p-4">
+                <form action="{{ url_for('add_question') }}" method="POST">
+                    <input type="hidden" name="csrf_token" value="{{ csrf_token() }}"/>
+                    
+                    <div class="mb-3">
+                        <label class="form-label">Question Text</label>
+                        <textarea class="form-control" name="question" rows="2" required></textarea>
+                    </div>
+                    
+                    <div class="row mb-3">
+                        <div class="col-md-6 mb-2">
+                            <label class="form-label">Option A</label>
+                            <input type="text" class="form-control" name="option_a" required>
+                        </div>
+                        <div class="col-md-6 mb-2">
+                            <label class="form-label">Option B</label>
+                            <input type="text" class="form-control" name="option_b" required>
+                        </div>
+                        <div class="col-md-6 mb-2">
+                            <label class="form-label">Option C</label>
+                            <input type="text" class="form-control" name="option_c" required>
+                        </div>
+                        <div class="col-md-6 mb-2">
+                            <label class="form-label">Option D</label>
+                            <input type="text" class="form-control" name="option_d" required>
+                        </div>
+                    </div>
+                    
+                    <div class="row mb-4">
+                        <div class="col-md-4">
+                            <label class="form-label">Correct Answer</label>
+                            <select class="form-select" name="correct_answer" required>
+                                <option value="A">Option A</option>
+                                <option value="B">Option B</option>
+                                <option value="C">Option C</option>
+                                <option value="D">Option D</option>
+                            </select>
+                        </div>
+                        <div class="col-md-4">
+                            <label class="form-label">Category</label>
+                            <select class="form-select" name="category" required>
+                                <option value="Phishing">Phishing</option>
+                                <option value="Password Security">Password Security</option>
+                                <option value="Social Engineering">Social Engineering</option>
+                                <option value="Malware">Malware</option>
+                                <option value="Network Security">Network Security</option>
+                                <option value="Data Privacy">Data Privacy</option>
+                                <option value="Safe Browsing">Safe Browsing</option>
+                                <option value="Email Security">Email Security</option>
+                            </select>
+                        </div>
+                        <div class="col-md-4">
+                            <label class="form-label">Difficulty</label>
+                            <select class="form-select" name="difficulty" required>
+                                <option value="Easy">Easy</option>
+                                <option value="Medium">Medium</option>
+                                <option value="Hard">Hard</option>
+                            </select>
+                        </div>
+                    </div>
+                    
+                    <button type="submit" class="btn btn-cyan px-4">Save Question</button>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

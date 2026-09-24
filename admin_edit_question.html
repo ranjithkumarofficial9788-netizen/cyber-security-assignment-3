@@ -1,0 +1,78 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<div class="row justify-content-center">
+    <div class="col-md-8">
+        <div class="card shadow">
+            <div class="card-header d-flex justify-content-between align-items-center py-3">
+                <h4 class="mb-0 text-cyan">Edit Question #{{ question.id }}</h4>
+                <a href="{{ url_for('admin_questions') }}" class="btn btn-sm btn-outline-light">Cancel</a>
+            </div>
+            <div class="card-body p-4">
+                <form action="{{ url_for('edit_question', id=question.id) }}" method="POST">
+                    <input type="hidden" name="csrf_token" value="{{ csrf_token() }}"/>
+                    
+                    <div class="mb-3">
+                        <label class="form-label">Question Text</label>
+                        <textarea class="form-control" name="question" rows="2" required>{{ question.question }}</textarea>
+                    </div>
+                    
+                    <div class="row mb-3">
+                        <div class="col-md-6 mb-2">
+                            <label class="form-label">Option A</label>
+                            <input type="text" class="form-control" name="option_a" value="{{ question.option_a }}" required>
+                        </div>
+                        <div class="col-md-6 mb-2">
+                            <label class="form-label">Option B</label>
+                            <input type="text" class="form-control" name="option_b" value="{{ question.option_b }}" required>
+                        </div>
+                        <div class="col-md-6 mb-2">
+                            <label class="form-label">Option C</label>
+                            <input type="text" class="form-control" name="option_c" value="{{ question.option_c }}" required>
+                        </div>
+                        <div class="col-md-6 mb-2">
+                            <label class="form-label">Option D</label>
+                            <input type="text" class="form-control" name="option_d" value="{{ question.option_d }}" required>
+                        </div>
+                    </div>
+                    
+                    <div class="row mb-4">
+                        <div class="col-md-4">
+                            <label class="form-label">Correct Answer</label>
+                            <select class="form-select" name="correct_answer" required>
+                                <option value="A" {% if question.correct_answer == 'A' %}selected{% endif %}>Option A</option>
+                                <option value="B" {% if question.correct_answer == 'B' %}selected{% endif %}>Option B</option>
+                                <option value="C" {% if question.correct_answer == 'C' %}selected{% endif %}>Option C</option>
+                                <option value="D" {% if question.correct_answer == 'D' %}selected{% endif %}>Option D</option>
+                            </select>
+                        </div>
+                        <div class="col-md-4">
+                            <label class="form-label">Category</label>
+                            <select class="form-select" name="category" required>
+                                <option value="Phishing" {% if question.category == 'Phishing' %}selected{% endif %}>Phishing</option>
+                                <option value="Password Security" {% if question.category == 'Password Security' %}selected{% endif %}>Password Security</option>
+                                <option value="Social Engineering" {% if question.category == 'Social Engineering' %}selected{% endif %}>Social Engineering</option>
+                                <option value="Malware" {% if question.category == 'Malware' %}selected{% endif %}>Malware</option>
+                                <option value="Network Security" {% if question.category == 'Network Security' %}selected{% endif %}>Network Security</option>
+                                <option value="Data Privacy" {% if question.category == 'Data Privacy' %}selected{% endif %}>Data Privacy</option>
+                                <option value="Safe Browsing" {% if question.category == 'Safe Browsing' %}selected{% endif %}>Safe Browsing</option>
+                                <option value="Email Security" {% if question.category == 'Email Security' %}selected{% endif %}>Email Security</option>
+                            </select>
+                        </div>
+                        <div class="col-md-4">
+                            <label class="form-label">Difficulty</label>
+                            <select class="form-select" name="difficulty" required>
+                                <option value="Easy" {% if question.difficulty == 'Easy' %}selected{% endif %}>Easy</option>
+                                <option value="Medium" {% if question.difficulty == 'Medium' %}selected{% endif %}>Medium</option>
+                                <option value="Hard" {% if question.difficulty == 'Hard' %}selected{% endif %}>Hard</option>
+                            </select>
+                        </div>
+                    </div>
+                    
+                    <button type="submit" class="btn btn-cyan px-4">Update Question</button>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

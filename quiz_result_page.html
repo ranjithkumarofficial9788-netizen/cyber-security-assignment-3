@@ -1,0 +1,43 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<div class="row justify-content-center mt-5">
+    <div class="col-md-8 text-center">
+        <div class="card shadow p-5">
+            <h2 class="text-cyan mb-4">Quiz Completed!</h2>
+            
+            <div class="mb-4">
+                <h1 class="display-1 fw-bold 
+                    {% if result.percentage >= 80 %} text-success
+                    {% elif result.percentage >= 50 %} text-warning
+                    {% else %} text-danger {% endif %}">
+                    {{ result.percentage }}%
+                </h1>
+            </div>
+            
+            <div class="row justify-content-center mb-4">
+                <div class="col-4">
+                    <h5 class="text-muted">Total Questions</h5>
+                    <h3>{{ result.total_questions }}</h3>
+                </div>
+                <div class="col-4">
+                    <h5 class="text-muted">Correct Answers</h5>
+                    <h3 class="text-success">{{ result.score }}</h3>
+                </div>
+                <div class="col-4">
+                    <h5 class="text-muted">Wrong Answers</h5>
+                    <h3 class="text-danger">{{ result.total_questions - result.score }}</h3>
+                </div>
+            </div>
+            
+            <hr class="border-secondary mb-4">
+            
+            <div class="d-flex justify-content-center gap-3">
+                <a href="{{ url_for('dashboard') }}" class="btn btn-outline-light">Back to Dashboard</a>
+                <a href="{{ url_for('quiz') }}" class="btn btn-cyan">Retake Quiz</a>
+                <a href="{{ url_for('history') }}" class="btn btn-outline-info">View History</a>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

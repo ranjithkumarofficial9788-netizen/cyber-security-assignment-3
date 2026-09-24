@@ -1,0 +1,53 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<div class="row mb-4">
+    <div class="col-md-12 d-flex justify-content-between align-items-center">
+        <h2 class="text-cyan">Quiz History</h2>
+        <a href="{{ url_for('dashboard') }}" class="btn btn-outline-light btn-sm">Back to Dashboard</a>
+    </div>
+</div>
+
+<div class="card shadow">
+    <div class="card-body p-0">
+        <div class="table-responsive">
+            <table class="table table-dark table-hover table-striped mb-0">
+                <thead class="table-secondary">
+                    <tr>
+                        <th>Date & Time</th>
+                        <th>Score</th>
+                        <th>Total Questions</th>
+                        <th>Percentage</th>
+                        <th>Status</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for res in results %}
+                    <tr>
+                        <td>{{ res.completed_at.strftime('%Y-%m-%d %H:%M') }}</td>
+                        <td>{{ res.score }}</td>
+                        <td>{{ res.total_questions }}</td>
+                        <td class="fw-bold 
+                            {% if res.percentage >= 80 %} text-success
+                            {% elif res.percentage >= 50 %} text-warning
+                            {% else %} text-danger {% endif %}">
+                            {{ res.percentage }}%
+                        </td>
+                        <td>
+                            {% if res.percentage >= 80 %} <span class="badge bg-success">Excellent</span>
+                            {% elif res.percentage >= 50 %} <span class="badge bg-warning text-dark">Needs Improvement</span>
+                            {% else %} <span class="badge bg-danger">Critical Risk</span>
+                            {% endif %}
+                        </td>
+                    </tr>
+                    {% else %}
+                    <tr>
+                        <td colspan="5" class="text-center py-4 text-muted">You haven't taken any quizzes yet.</td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+{% endblock %}

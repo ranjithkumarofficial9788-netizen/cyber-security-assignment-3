@@ -1,0 +1,42 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<div class="row justify-content-center mt-4">
+    <div class="col-md-6">
+        <div class="card shadow">
+            <div class="card-header text-center py-3">
+                <h4 class="mb-0 text-cyan">Create Account</h4>
+                <small class="text-muted">Join the Security Awareness Program</small>
+            </div>
+            <div class="card-body p-4">
+                <form action="{{ url_for('register') }}" method="POST">
+                    <input type="hidden" name="csrf_token" value="{{ csrf_token() }}"/>
+                    
+                    <div class="mb-3">
+                        <label for="username" class="form-label">Username</label>
+                        <input type="text" class="form-control" id="username" name="username" required>
+                    </div>
+                    <div class="mb-3">
+                        <label for="email" class="form-label">Email Address</label>
+                        <input type="email" class="form-control" id="email" name="email" required>
+                    </div>
+                    <div class="mb-3">
+                        <label for="password" class="form-label">Password (Min 8 characters)</label>
+                        <input type="password" class="form-control" id="password" name="password" minlength="8" required>
+                    </div>
+                    <div class="mb-4">
+                        <label for="confirm_password" class="form-label">Confirm Password</label>
+                        <input type="password" class="form-control" id="confirm_password" name="confirm_password" minlength="8" required>
+                    </div>
+                    <div class="d-grid">
+                        <button type="submit" class="btn btn-cyan btn-lg">Register</button>
+                    </div>
+                </form>
+            </div>
+            <div class="card-footer text-center py-3">
+                Already have an account? <a href="{{ url_for('login') }}" class="text-cyan text-decoration-none">Login here</a>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

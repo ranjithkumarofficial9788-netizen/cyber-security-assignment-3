@@ -1,0 +1,104 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<div class="text-center mb-5">
+    <h1 class="text-cyan">Cybersecurity Awareness Hub</h1>
+    <p class="text-muted lead">Learn the fundamentals to protect yourself and your organization.</p>
+</div>
+
+<div class="row g-4">
+    <!-- Phishing -->
+    <div class="col-md-6">
+        <div class="card h-100 shadow-sm border-start border-warning border-4">
+            <div class="card-body">
+                <h4 class="card-title text-warning"><i class="bi bi-envelope-exclamation"></i> Phishing</h4>
+                <p class="card-text">Phishing is an attack where scammers disguise themselves as a trustworthy entity to steal sensitive information like passwords or credit card numbers.</p>
+                <strong>How to spot it:</strong>
+                <ul class="text-muted">
+                    <li>Urgent or threatening language.</li>
+                    <li>Unexpected requests for sensitive information.</li>
+                    <li>Mismatched or suspicious sender email addresses.</li>
+                </ul>
+            </div>
+        </div>
+    </div>
+
+    <!-- Password Security -->
+    <div class="col-md-6">
+        <div class="card h-100 shadow-sm border-start border-info border-4">
+            <div class="card-body">
+                <h4 class="card-title text-info"><i class="bi bi-key"></i> Password Security & 2FA</h4>
+                <p class="card-text">Weak passwords are the easiest way for hackers to access your accounts. Always use unique, complex passwords for every service.</p>
+                <strong>Best Practices:</strong>
+                <ul class="text-muted">
+                    <li>Use a Password Manager.</li>
+                    <li>Enable Two-Factor Authentication (2FA) wherever possible.</li>
+                    <li>Never reuse passwords across different sites.</li>
+                </ul>
+            </div>
+        </div>
+    </div>
+
+    <!-- Social Engineering -->
+    <div class="col-md-6">
+        <div class="card h-100 shadow-sm border-start border-danger border-4">
+            <div class="card-body">
+                <h4 class="card-title text-danger"><i class="bi bi-people"></i> Social Engineering</h4>
+                <p class="card-text">Social engineering is the psychological manipulation of people into performing actions or divulging confidential information.</p>
+                <strong>Prevention:</strong>
+                <ul class="text-muted">
+                    <li>Verify the identity of anyone asking for sensitive data.</li>
+                    <li>Don't blindly trust individuals claiming authority (e.g., "IT Support" calling you).</li>
+                </ul>
+            </div>
+        </div>
+    </div>
+
+    <!-- Malware -->
+    <div class="col-md-6">
+        <div class="card h-100 shadow-sm border-start border-success border-4">
+            <div class="card-body">
+                <h4 class="card-title text-success"><i class="bi bi-bug"></i> Malware & Ransomware</h4>
+                <p class="card-text">Malicious software designed to disrupt, damage, or gain unauthorized access. Ransomware encrypts your files and demands payment.</p>
+                <strong>Protection:</strong>
+                <ul class="text-muted">
+                    <li>Keep your operating system and antivirus updated.</li>
+                    <li>Do not download software from untrusted sources.</li>
+                    <li>Regularly backup your important files offline.</li>
+                </ul>
+            </div>
+        </div>
+    </div>
+    
+    <!-- Public Wi-Fi -->
+    <div class="col-md-6">
+        <div class="card h-100 shadow-sm border-start border-secondary border-4">
+            <div class="card-body">
+                <h4 class="card-title text-secondary"><i class="bi bi-wifi"></i> Public Wi-Fi Risks</h4>
+                <p class="card-text">Free Wi-Fi networks in cafes or airports are often unencrypted, meaning attackers can intercept the data you send and receive.</p>
+                <strong>Safety measures:</strong>
+                <ul class="text-muted">
+                    <li>Use a Virtual Private Network (VPN).</li>
+                    <li>Avoid accessing banking or sensitive apps on public networks.</li>
+                </ul>
+            </div>
+        </div>
+    </div>
+    
+    <!-- Safe Browsing -->
+    <div class="col-md-6">
+        <div class="card h-100 shadow-sm border-start border-primary border-4">
+            <div class="card-body">
+                <h4 class="card-title text-primary"><i class="bi bi-globe"></i> Safe Browsing & Data Privacy</h4>
+                <p class="card-text">Browsing safely means protecting your personal data and ensuring the sites you visit are secure.</p>
+                <strong>Guidelines:</strong>
+                <ul class="text-muted">
+                    <li>Always check for HTTPS in the URL.</li>
+                    <li>Limit the personal information you share on social media.</li>
+                    <li>Be cautious of clicking random links or pop-ups.</li>
+                </ul>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

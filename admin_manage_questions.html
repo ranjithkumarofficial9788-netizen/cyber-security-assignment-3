@@ -1,0 +1,60 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<div class="row mb-4">
+    <div class="col-md-8">
+        <h2 class="text-cyan">Manage Questions</h2>
+    </div>
+    <div class="col-md-4 text-end">
+        <a href="{{ url_for('add_question') }}" class="btn btn-cyan">+ Add New Question</a>
+    </div>
+</div>
+
+<div class="card shadow">
+    <div class="card-body p-0">
+        <div class="table-responsive">
+            <table class="table table-dark table-striped table-hover mb-0">
+                <thead class="table-secondary">
+                    <tr>
+                        <th>ID</th>
+                        <th style="width: 40%">Question</th>
+                        <th>Category</th>
+                        <th>Difficulty</th>
+                        <th>Correct</th>
+                        <th class="text-center">Actions</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for q in questions %}
+                    <tr>
+                        <td>{{ q.id }}</td>
+                        <td>{{ q.question[:60] }}...</td>
+                        <td><span class="badge bg-secondary">{{ q.category }}</span></td>
+                        <td>
+                            <span class="badge 
+                                {% if q.difficulty == 'Easy' %}bg-success
+                                {% elif q.difficulty == 'Medium' %}bg-warning text-dark
+                                {% else %}bg-danger{% endif %}">
+                                {{ q.difficulty }}
+                            </span>
+                        </td>
+                        <td class="fw-bold">{{ q.correct_answer }}</td>
+                        <td class="text-center">
+                            <div class="d-inline-flex gap-2">
+                                <a href="{{ url_for('edit_question', id=q.id) }}" class="btn btn-sm btn-outline-info">Edit</a>
+                                <form action="{{ url_for('delete_question', id=q.id) }}" method="POST" class="d-inline">
+                                    <input type="hidden" name="csrf_token" value="{{ csrf_token() }}"/>
+                                    <button type="submit" class="btn btn-sm btn-outline-danger">Delete</button>
+                                </form>
+                            </div>
+                        </td>
+                    </tr>
+                    {% else %}
+                    <tr><td colspan="6" class="text-center py-4">No questions found. Add some!</td></tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+{% endblock %}
